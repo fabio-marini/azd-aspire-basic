@@ -1,0 +1,6 @@
+@AzdAspire.WebApplication1_HostAddress = http://localhost:5100
+
+GET {{AzdAspire.WebApplication1_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,52 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzdAspire.AppHost", "AzdAspire.AppHost\AzdAspire.AppHost.csproj", "{218A3997-5C7E-41D7-8831-28030E228690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzdAspire.ServiceDefaults", "AzdAspire.ServiceDefaults\AzdAspire.ServiceDefaults.csproj", "{89EB7027-4B2E-5606-40D6-62C37F44B881}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{9717CEA0-57F1-458B-AD75-53C9CA4A8EC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzdAspire.WebApplication1", "AzdAspire.WebApplication1\AzdAspire.WebApplication1.csproj", "{5B31749C-70F7-0331-4017-D8CD14164E71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzdAspire.WebApplication2", "AzdAspire.WebApplication2\AzdAspire.WebApplication2.csproj", "{6D4BC379-512C-70A5-A129-6E3B5FACABC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{218A3997-5C7E-41D7-8831-28030E228690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218A3997-5C7E-41D7-8831-28030E228690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218A3997-5C7E-41D7-8831-28030E228690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218A3997-5C7E-41D7-8831-28030E228690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89EB7027-4B2E-5606-40D6-62C37F44B881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89EB7027-4B2E-5606-40D6-62C37F44B881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89EB7027-4B2E-5606-40D6-62C37F44B881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89EB7027-4B2E-5606-40D6-62C37F44B881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B31749C-70F7-0331-4017-D8CD14164E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B31749C-70F7-0331-4017-D8CD14164E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B31749C-70F7-0331-4017-D8CD14164E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B31749C-70F7-0331-4017-D8CD14164E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4BC379-512C-70A5-A129-6E3B5FACABC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4BC379-512C-70A5-A129-6E3B5FACABC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4BC379-512C-70A5-A129-6E3B5FACABC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4BC379-512C-70A5-A129-6E3B5FACABC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{218A3997-5C7E-41D7-8831-28030E228690} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{89EB7027-4B2E-5606-40D6-62C37F44B881} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5B31749C-70F7-0331-4017-D8CD14164E71} = {9717CEA0-57F1-458B-AD75-53C9CA4A8EC0}
+		{6D4BC379-512C-70A5-A129-6E3B5FACABC5} = {9717CEA0-57F1-458B-AD75-53C9CA4A8EC0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98FC5089-A889-461C-91BB-288CA1D62A92}
+	EndGlobalSection
+EndGlobal
