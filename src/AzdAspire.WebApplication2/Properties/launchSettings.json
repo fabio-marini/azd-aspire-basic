@@ -1,5 +1,13 @@
 {
   "profiles": {
+    "https": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7252;http://localhost:5118"
+    },
     "Container (.NET SDK)": {
       "commandName": "SdkContainer",
       "environmentVariables": {

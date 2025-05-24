@@ -8,7 +8,7 @@ resource app_config 'Microsoft.AppConfiguration/configurationStores@2024-05-01' 
     disableLocalAuth: true
   }
   sku: {
-    name: 'standard'
+    name: 'free'
   }
   tags: {
     'aspire-resource-name': 'app-config'

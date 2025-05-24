@@ -1,14 +1,9 @@
-@description('The location for the resource(s) to be deployed.')
-param location string = resourceGroup().location
-
-param app_secrets_outputs_name string
-
+param appSecretsName string
 param principalType string
-
 param principalId string
 
 resource app_secrets 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
-  name: app_secrets_outputs_name
+  name: appSecretsName
 }
 
 resource app_secrets_KeyVaultSecretsUser 'Microsoft.Authorization/roleAssignments@2022-04-01' = {

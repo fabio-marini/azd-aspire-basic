@@ -1,14 +1,9 @@
-@description('The location for the resource(s) to be deployed.')
-param location string = resourceGroup().location
-
-param asb_messaging_outputs_name string
-
+param messageBusName string
 param principalType string
-
 param principalId string
 
 resource asb_messaging 'Microsoft.ServiceBus/namespaces@2024-01-01' existing = {
-  name: asb_messaging_outputs_name
+  name: messageBusName
 }
 
 resource asb_messaging_AzureServiceBusDataOwner 'Microsoft.Authorization/roleAssignments@2022-04-01' = {

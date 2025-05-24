@@ -31,8 +31,6 @@ properties:
         value: '{{ .Env.MESSAGES_STG_BLOBENDPOINT }}'
       - name: connectionstrings--messages-tbl
         value: '{{ .Env.MESSAGES_STG_TABLEENDPOINT }}'
-      - name: connectionstrings--rmq-messaging
-        value: amqp://guest:{{ securedParameter "rmq_messaging_password" }}@rmq-messaging:5672
   template:
     containers:
       - image: {{ .Image }}
@@ -60,8 +58,6 @@ properties:
             secretRef: connectionstrings--messages-blb
           - name: ConnectionStrings__messages-tbl
             secretRef: connectionstrings--messages-tbl
-          - name: ConnectionStrings__rmq-messaging
-            secretRef: connectionstrings--rmq-messaging
     scale:
       minReplicas: 1
 tags:

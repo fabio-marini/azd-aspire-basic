@@ -1,14 +1,9 @@
-@description('The location for the resource(s) to be deployed.')
-param location string = resourceGroup().location
-
-param app_config_outputs_name string
-
+param appConfigName string
 param principalType string
-
 param principalId string
 
 resource app_config 'Microsoft.AppConfiguration/configurationStores@2024-05-01' existing = {
-  name: app_config_outputs_name
+  name: appConfigName
 }
 
 resource app_config_AppConfigurationDataOwner 'Microsoft.Authorization/roleAssignments@2022-04-01' = {

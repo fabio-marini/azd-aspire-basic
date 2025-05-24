@@ -1,14 +1,9 @@
-@description('The location for the resource(s) to be deployed.')
-param location string = resourceGroup().location
-
-param messages_stg_outputs_name string
-
+param messageStgName string
 param principalType string
-
 param principalId string
 
 resource messages_stg 'Microsoft.Storage/storageAccounts@2024-01-01' existing = {
-  name: messages_stg_outputs_name
+  name: messageStgName
 }
 
 resource messages_stg_StorageBlobDataContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -31,12 +26,12 @@ resource messages_stg_StorageTableDataContributor 'Microsoft.Authorization/roleA
   scope: messages_stg
 }
 
-resource messages_stg_StorageQueueDataContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(messages_stg.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '974c5e8b-45b9-4653-ba55-5f855dd0fb88'))
-  properties: {
-    principalId: principalId
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '974c5e8b-45b9-4653-ba55-5f855dd0fb88')
-    principalType: principalType
-  }
-  scope: messages_stg
-}
+// resource messages_stg_StorageQueueDataContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+//   name: guid(messages_stg.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '974c5e8b-45b9-4653-ba55-5f855dd0fb88'))
+//   properties: {
+//     principalId: principalId
+//     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '974c5e8b-45b9-4653-ba55-5f855dd0fb88')
+//     principalType: principalType
+//   }
+//   scope: messages_stg
+// }

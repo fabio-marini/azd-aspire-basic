@@ -5,11 +5,11 @@
       "principalId": {
         "value": "${AZURE_PRINCIPAL_ID}"
       },
-      "rmq_messaging_password": {
-        "value": "${AZURE_RMQ_MESSAGING_PASSWORD}"
-      },
       "environmentName": {
         "value": "${AZURE_ENV_NAME}"
+      },
+      "hybridEnvironment": {
+        "value": "${HYBRID_ENVIRONMENT}"
       },
       "location": {
         "value": "${AZURE_LOCATION}"
