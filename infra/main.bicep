@@ -19,8 +19,6 @@ var tags = {
   'azd-env-name': environmentName
 }
 
-// FIXME: asb-messaging (what about rmq-messaging?!?) => message-bus + messages-stg => message-stg
-
 resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: 'rg-${environmentName}'
   location: location
@@ -84,8 +82,8 @@ output AZURE_CONTAINER_APPS_ENVIRONMENT_NAME string = !hybridEnvironment ? resou
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = !hybridEnvironment ? resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_ID : ''
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = !hybridEnvironment ? resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN : ''
 
-output APP_CONFIG_APPCONFIGENDPOINT string = app_config.outputs.appConfigEndpoint
-output APP_SECRETS_VAULTURI string = app_secrets.outputs.vaultUri
-output ASB_MESSAGING_SERVICEBUSENDPOINT string = asb_messaging.outputs.serviceBusEndpoint
-output MESSAGES_STG_BLOBENDPOINT string = messages_stg.outputs.blobEndpoint
-output MESSAGES_STG_TABLEENDPOINT string = messages_stg.outputs.tableEndpoint
+output APP_CONFIG_APPCONFIGENDPOINT string = services.outputs.APP_CONFIG_APPCONFIGENDPOINT
+output APP_SECRETS_VAULTURI string = services.outputs.APP_SECRETS_VAULTURI
+output ASB_MESSAGING_SERVICEBUSENDPOINT string = services.outputs.MESSAGE_BUS_SERVICEBUSENDPOINT
+output MESSAGES_STG_BLOBENDPOINT string = services.outputs.MESSAGE_STG_BLOBENDPOINT
+output MESSAGES_STG_TABLEENDPOINT string = services.outputs.MESSAGE_STG_TABLEENDPOINT

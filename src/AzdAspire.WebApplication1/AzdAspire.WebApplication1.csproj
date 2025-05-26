@@ -19,4 +19,14 @@
     <ProjectReference Include="..\AzdAspire.ServiceDefaults\AzdAspire.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Aspire.Azure.Security.KeyVault" Version="9.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="8.1.1" />
+    <PackageReference Include="Rebus.AzureServiceBus" Version="10.3.0" />
+    <PackageReference Include="Rebus.RabbitMq" Version="10.0.0">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="Rebus.ServiceProvider" Version="10.3.0" />
+  </ItemGroup>
+
 </Project>

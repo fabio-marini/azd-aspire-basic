@@ -7,6 +7,7 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:17021;http://localhost:15258",
       "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "azd-aspire-hybrid",
         "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21240",
         "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22097"
       }

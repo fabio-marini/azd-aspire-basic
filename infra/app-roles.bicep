@@ -7,8 +7,9 @@ param principalType  string
 
 param resourceGroupName string
 
-param appConfigName string
+#disable-next-line secure-secrets-in-params   // Doesn't contain a secret
 param appSecretsName string
+param appConfigName string
 param messageBusName string
 param messageStgName string
 
