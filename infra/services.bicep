@@ -29,21 +29,10 @@ module asb_messaging 'asb-messaging/asb-messaging.module.bicep' = {
   }
 }
 
-module messages_stg 'messages-stg/messages-stg.module.bicep' = {
-  name: 'messages-stg'
-  scope: resourceGroup(resourceGroupName)
-  params: {
-    location: location
-  }
-}
-
 output APP_CONFIG_APPCONFIGENDPOINT string = app_config.outputs.appConfigEndpoint
 output APP_SECRETS_VAULTURI string = app_secrets.outputs.vaultUri
 output MESSAGE_BUS_SERVICEBUSENDPOINT string = asb_messaging.outputs.serviceBusEndpoint
-output MESSAGE_STG_TABLEENDPOINT string = messages_stg.outputs.tableEndpoint
-output MESSAGE_STG_BLOBENDPOINT string = messages_stg.outputs.blobEndpoint
 
 output APP_CONFIG_APPCONFIGNAME string = app_config.outputs.name
 output APP_SECRETS_VAULTNAME string = app_secrets.outputs.name
 output MESSAGE_BUS_SERVICEBUSNAME string = asb_messaging.outputs.name
-output MESSAGE_STG_TABLENAME string = messages_stg.outputs.name

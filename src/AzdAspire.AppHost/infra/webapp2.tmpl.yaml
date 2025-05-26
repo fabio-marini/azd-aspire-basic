@@ -27,10 +27,6 @@ properties:
         value: '{{ .Env.APP_SECRETS_VAULTURI }}'
       - name: connectionstrings--asb-messaging
         value: '{{ .Env.ASB_MESSAGING_SERVICEBUSENDPOINT }}'
-      - name: connectionstrings--messages-blb
-        value: '{{ .Env.MESSAGES_STG_BLOBENDPOINT }}'
-      - name: connectionstrings--messages-tbl
-        value: '{{ .Env.MESSAGES_STG_TABLEENDPOINT }}'
   template:
     containers:
       - image: {{ .Image }}
@@ -54,10 +50,6 @@ properties:
             secretRef: connectionstrings--app-secrets
           - name: ConnectionStrings__asb-messaging
             secretRef: connectionstrings--asb-messaging
-          - name: ConnectionStrings__messages-blb
-            secretRef: connectionstrings--messages-blb
-          - name: ConnectionStrings__messages-tbl
-            secretRef: connectionstrings--messages-tbl
     scale:
       minReplicas: 1
 tags:

@@ -1,4 +1,3 @@
-using Aspire.Hosting.Azure;
 using Microsoft.Extensions.Configuration;
 
 public static class Extensions
@@ -22,14 +21,5 @@ public static class Extensions
         }
 
         return default;
-    }
-
-    public static IResourceBuilder<AzureStorageResource> GetStorageResource(this IDistributedApplicationBuilder builder, string name)
-    {
-        // if storage resource already exists, use it - otherwise create a new one
-        return builder.Resources.OfType<AzureStorageResource>().Any(res => res.Name == name)
-            ? builder.CreateResourceBuilder<AzureStorageResource>(name)
-            : builder.AddAzureStorage(name)
-            ;
     }
 }

@@ -11,7 +11,6 @@ param resourceGroupName string
 param appSecretsName string
 param appConfigName string
 param messageBusName string
-param messageStgName string
 
 module app_config_roles 'app-config-roles/app-config-roles.module.bicep' = {
   name: 'app-config-roles'
@@ -38,16 +37,6 @@ module asb_messaging_roles 'asb-messaging-roles/asb-messaging-roles.module.bicep
   scope: resourceGroup(resourceGroupName)
   params: {
     messageBusName: messageBusName
-    principalId: principalId
-    principalType: principalType
-  }
-}
-
-module messages_stg_roles 'messages-stg-roles/messages-stg-roles.module.bicep' = {
-  name: 'messages-stg-roles'
-  scope: resourceGroup(resourceGroupName)
-  params: {
-    messageStgName: messageStgName
     principalId: principalId
     principalType: principalType
   }

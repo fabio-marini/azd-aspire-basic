@@ -43,7 +43,6 @@ module user_roles 'app-roles.bicep' = if (principalId != '') {
     appConfigName: services.outputs.APP_CONFIG_APPCONFIGNAME
     appSecretsName: services.outputs.APP_SECRETS_VAULTNAME
     messageBusName: services.outputs.MESSAGE_BUS_SERVICEBUSNAME
-    messageStgName: services.outputs.MESSAGE_STG_TABLENAME
     principalType: 'User'
   }
 }
@@ -67,7 +66,6 @@ module mi_roles 'app-roles.bicep' = if (!hybridEnvironment) {
     appConfigName: services.outputs.APP_CONFIG_APPCONFIGNAME
     appSecretsName: services.outputs.APP_SECRETS_VAULTNAME
     messageBusName: services.outputs.MESSAGE_BUS_SERVICEBUSNAME
-    messageStgName: services.outputs.MESSAGE_STG_TABLENAME
     principalType: 'ServicePrincipal'
   }
 }
@@ -85,5 +83,3 @@ output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = !hybridEnvironme
 output APP_CONFIG_APPCONFIGENDPOINT string = services.outputs.APP_CONFIG_APPCONFIGENDPOINT
 output APP_SECRETS_VAULTURI string = services.outputs.APP_SECRETS_VAULTURI
 output ASB_MESSAGING_SERVICEBUSENDPOINT string = services.outputs.MESSAGE_BUS_SERVICEBUSENDPOINT
-output MESSAGES_STG_BLOBENDPOINT string = services.outputs.MESSAGE_STG_BLOBENDPOINT
-output MESSAGES_STG_TABLEENDPOINT string = services.outputs.MESSAGE_STG_TABLEENDPOINT
