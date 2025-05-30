@@ -3,8 +3,6 @@ using Microsoft.Extensions.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-// TODO: finish readme and update diagram
-
 builder.Configuration.AddDotNetEnv($"../../.azure/{builder.Environment.EnvironmentName}/.env");
 
 var app1 = builder.AddProject<Projects.AzdAspire_WebApplication1>("webapp1");
@@ -12,7 +10,7 @@ var app2 = builder.AddProject<Projects.AzdAspire_WebApplication2>("webapp2");
 
 if (builder.Environment.IsDevelopment())
 {
-    var rmq = builder.AddRabbitMQ("rmq-messaging");
+    var rmq = builder.AddRabbitMQ("rmq-messaging").WithManagementPlugin();
 
     app1.WithReference(rmq).WaitFor(rmq);
     app2.WithReference(rmq).WaitFor(rmq);

@@ -19,9 +19,15 @@ app.MapDefaultEndpoints();
 
 app.UseHttpsRedirection();
 
-app.MapPost("/echo", async ([FromServices] IBus bus, EchoRequest req) =>
+app.MapPost("/echo", async ([FromServices] IBus bus, [FromServices] IConfiguration cfg, EchoRequest req) =>
 {
-    await bus.Send(req);
+    var headers = new Dictionary<string, string>
+    {
+        { "x-appname", cfg.GetValue<string>("WebApp1:AppName") ?? "Not set! :(" },
+        { "x-appkey", cfg.GetValue<string>("WebApp1:AppKey") ?? "Not set! :(" }
+    };
+
+    await bus.Send(req, headers);
 });
 
 app.Run();

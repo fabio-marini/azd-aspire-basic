@@ -1,11 +1,18 @@
 {
   "profiles": {
-    "Container (.NET SDK)": {
-      "commandName": "SdkContainer",
+    "Production": {
+      "commandName": "Project",
       "environmentVariables": {
       },
-      "publishAllPorts": true,
-      "useSSL": true,
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7099;http://localhost:5100"
+    },
+    "Development": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7099;http://localhost:5100"
     }
   },
