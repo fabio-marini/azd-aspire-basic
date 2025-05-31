@@ -41,7 +41,7 @@ The `bicep` template used to provision the Azure resources takes the following p
 - `hybridEnvironment`: corresponds to `HYBRID_ENVIRONMENT` and must be set manually (can be either `true` or `false`)
 - `principalId`: corresponds to `AZURE_PRINCIPAL_ID` and must be set manually (it's the ID of the developer, i.e. you)
 
-The principal specified above will be given appropriate permissions to access the provisioned resources, e.g. create secrets in the key vault
+The principal specified above will be given appropriate permissions to access the provisioned resources, e.g. create secrets in the key vault.
 
 ## 🏠 Local Development
 In this mode no resources are provisioned and all apps and services run locally:
@@ -63,7 +63,7 @@ Hybrid development is enabled as follows:
 - create a new `azd` environment using the command `azd env new <environment>`, where `<environment>` is your chosen environment name
 - locate the newly created file `.azure\<environment>\.env` and append the line `HYBRID_ENVIRONMENT="true"`
 - create the service resources by running `azd provision` (you can use the `--preview` flag to preview the changes without creating any resources)
-- locate the `Production` profile in ['launchSettings.json'](src\AzdAspire.AppHost\Properties\launchSettings.json) in the Aspire host project
+- locate the `Production` profile in the `launchSettings.json`of the Aspire host project
 - in the above profile, set the `DOTNET_ENVIRONMENT` variable to `<environment>`
 - to run the application in Visual Studio, select the **Production** profile and hit F5
 - in VS Code, use: `dotnet run --project .\src\AzdAspire.AppHost\AzdAspire.AppHost.csproj --launch-profile Production`
@@ -75,3 +75,24 @@ To create a fully provisioned runtime environment, follow these steps:
 - create a new environment using the command `azd env new <environment>`
 - create the service resources by running `azd provision`
 - deploy the applications by running `azd deploy`
+
+## 🧪 Testing the Solution
+To test that everything is wired up correctly, use the `POST /echo` endpoint of **WebApp1**, e.g.
+```
+Invoke-WebRequest -Uri https://localhost:7099/echo `
+  -Method POST `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{ "message": "Hello World! :)" }'
+```
+
+Take a look at the logs for **WebApp2** to confirm connectivity to the message bus. They should show that an `EchoRequest` was received:
+```
+Received AzdAspire.ServiceDefaults.EchoRequest with message: Hello World! :) and headers [x-appkey, LocalKey1], [x-appname, LocalApp1]
+```
+
+And the logs for **WebApp1** should show that an `EchoResponse` was received:
+```
+Received AzdAspire.ServiceDefaults.EchoResponse with message: Hello World! :) and headers [x-appkey, LocalKey2], [x-appname, LocalApp2]
+```
+
+The messages headers will contain the values of the `AppName` and `AppKey` settings and will confirm the connectivity to Key Vault and App config (for hybrid environments).
