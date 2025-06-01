@@ -2,8 +2,16 @@
 using Rebus.Config;
 using Rebus.Transport;
 
+/// <summary>
+/// Provides extension methods for configuring Azure services and Rebus messaging in the application.
+/// </summary>
 public static class Extensions
 {
+    /// <summary>
+    /// Creates a <see cref="DefaultAzureCredential"/> with options tailored for the application's environment.
+    /// </summary>
+    /// <param name="builder">The application builder instance.</param>
+    /// <returns>A configured <see cref="DefaultAzureCredential"/> instance.</returns>
     public static DefaultAzureCredential WithAzureCredentials(this IHostApplicationBuilder builder)
     {
         var credentialOptions = new DefaultAzureCredentialOptions
@@ -20,6 +28,11 @@ public static class Extensions
         return new DefaultAzureCredential(credentialOptions);
     }
 
+    /// <summary>
+    /// Adds Azure Key Vault configuration to the application if a connection string is present.
+    /// </summary>
+    /// <param name="builder">The application builder instance.</param>
+    /// <returns>The application builder for chaining.</returns>
     public static IHostApplicationBuilder AddAzureKeyVault(this IHostApplicationBuilder builder)
     {
         var connectionString = builder.Configuration.GetConnectionString("app-secrets");
@@ -32,6 +45,11 @@ public static class Extensions
         return builder;
     }
 
+    /// <summary>
+    /// Adds Azure App Configuration to the application if a connection string is present.
+    /// </summary>
+    /// <param name="builder">The application builder instance.</param>
+    /// <returns>The application builder for chaining.</returns>
     public static IHostApplicationBuilder AddAzureAppConfiguration(this IHostApplicationBuilder builder)
     {
         var connectionString = builder.Configuration.GetConnectionString("app-config");
@@ -49,6 +67,11 @@ public static class Extensions
         return builder;
     }
 
+    /// <summary>
+    /// Configures Rebus messaging for the application, using Azure Service Bus or RabbitMQ based on configuration.
+    /// </summary>
+    /// <param name="builder">The application builder instance.</param>
+    /// <returns>The application builder for chaining.</returns>
     public static IHostApplicationBuilder AddRebus(this IHostApplicationBuilder builder)
     {
         var configureTransport = new Action<StandardConfigurer<ITransport>>(cfg =>
