@@ -72,9 +72,10 @@ Hybrid development is enabled as follows:
 In this mode all the required resources are provisioned and all apps and services run in the cloud.
 
 To create a fully provisioned runtime environment, follow these steps:
-- create a new environment using the command `azd env new <environment>`
-- create the service resources by running `azd provision`
-- deploy the applications by running `azd deploy`
+1. download the template with `azd init -t fabio-marini/azd-aspire-basic -b master`
+2. login to Azure with `azd auth login`
+3. create the service resources by running `azd provision`
+4. deploy the applications by running `azd deploy`
 
 ## 🧪 Testing the Solution
 To test that everything is wired up correctly, use the `POST /echo` endpoint of **WebApp1**, e.g.
