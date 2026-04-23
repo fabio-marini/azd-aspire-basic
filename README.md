@@ -40,6 +40,7 @@ The `bicep` template used to provision the Azure resources takes the following p
 - `location`: corresponds to `AZURE_LOCATION` and is set by `azd`
 - `hybridEnvironment`: corresponds to `HYBRID_ENVIRONMENT` and must be set manually (can be either `true` or `false`)
 - `principalId`: corresponds to `AZURE_PRINCIPAL_ID` and must be set manually (it's the ID of the developer, i.e. you)
+- `infrastructureSubnetId`: corresponds to `INFRASTRUCTURE_SUBNET_ID` and must be set manually. If provided, the Container App Environment will be configured with VNet integration. Leave empty (default) to deploy without VNet integration. **⚠️ Warning**: Adding or changing this parameter on an existing Container App Environment is a destructive change; you must run `azd down --force --purge` followed by `azd up` to migrate.
 
 The principal specified above will be given appropriate permissions to access the provisioned resources, e.g. create secrets in the key vault.
 

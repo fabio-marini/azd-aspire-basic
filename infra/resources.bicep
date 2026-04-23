@@ -1,8 +1,8 @@
 @description('The location used for all deployed resources')
 param location string = resourceGroup().location
-@description('Id of the user or app to assign application roles')
-param principalId string = ''
 
+@description('Id of the infrastructure subnet')
+param infrastructureSubnetId string = ''
 
 @description('Tags that will be applied to all resources')
 param tags object = {}
@@ -45,7 +45,40 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
   tags: tags
 }
 
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-02-02-preview' = {
+resource containerAppEnvironmentWithVnet 'Microsoft.App/managedEnvironments@2024-02-02-preview' = if (infrastructureSubnetId != '') {
+  name: 'cae-${resourceToken}'
+  location: location
+  properties: {
+    workloadProfiles: [{
+      workloadProfileType: 'Consumption'
+      name: 'consumption'
+    }]
+    appLogsConfiguration: {
+      destination: 'log-analytics'
+      logAnalyticsConfiguration: {
+        customerId: logAnalyticsWorkspace.properties.customerId
+        sharedKey: logAnalyticsWorkspace.listKeys().primarySharedKey
+      }
+    }
+    // Adding vnetConfiguration is a DESTRUCTIVE change on an existing environment.
+    // Migration: run 'azd down --force --purge' then 'azd up'.
+    // Confirm on-prem address space does not overlap 10.0.0.0/16 before deploying.
+    vnetConfiguration: {
+      infrastructureSubnetId: infrastructureSubnetId
+      internal: false
+    }
+  }
+  tags: tags
+
+  resource aspireDashboard 'dotNetComponents' = {
+    name: 'aspire-dashboard'
+    properties: {
+      componentType: 'AspireDashboard'
+    }
+  }
+}
+
+resource containerAppEnvironmentSansVnet 'Microsoft.App/managedEnvironments@2024-02-02-preview' = if (infrastructureSubnetId == '') {
   name: 'cae-${resourceToken}'
   location: location
   properties: {
@@ -69,16 +102,6 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-02-02-p
       componentType: 'AspireDashboard'
     }
   }
-
-}
-
-resource explicitContributorUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(containerAppEnvironment.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b24988ac-6180-42a0-ab88-20f7382dd24c'))
-  scope: containerAppEnvironment
-  properties: {
-    principalId: principalId
-    roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b24988ac-6180-42a0-ab88-20f7382dd24c')
-  }
 }
 
 output MANAGED_IDENTITY_CLIENT_ID string = managedIdentity.properties.clientId
@@ -89,6 +112,6 @@ output AZURE_LOG_ANALYTICS_WORKSPACE_ID string = logAnalyticsWorkspace.id
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.loginServer
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = managedIdentity.id
 output AZURE_CONTAINER_REGISTRY_NAME string = containerRegistry.name
-output AZURE_CONTAINER_APPS_ENVIRONMENT_NAME string = containerAppEnvironment.name
-output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = containerAppEnvironment.id
-output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = containerAppEnvironment.properties.defaultDomain
+output AZURE_CONTAINER_APPS_ENVIRONMENT_NAME string = (infrastructureSubnetId == '') ? containerAppEnvironmentSansVnet.name : containerAppEnvironmentWithVnet.name
+output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = (infrastructureSubnetId == '') ? containerAppEnvironmentSansVnet.id : containerAppEnvironmentWithVnet.id 
+output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = (infrastructureSubnetId == '') ? containerAppEnvironmentSansVnet!.properties.defaultDomain : containerAppEnvironmentWithVnet!.properties.defaultDomain

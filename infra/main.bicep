@@ -15,6 +15,9 @@ param location string
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
+@description('Id of the infrastructure subnet')
+param infrastructureSubnetId string = ''
+
 var tags = {
   'azd-env-name': environmentName
 }
@@ -53,7 +56,7 @@ module resources 'resources.bicep' = if (!hybridEnvironment) {
   params: {
     location: location
     tags: tags
-    principalId: principalId
+    infrastructureSubnetId: infrastructureSubnetId
   }
 }
 
